@@ -11,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
 AppAsset::register($this);
+Yii::$app->name = 'Delivery Contacts Admin Panel'
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -35,12 +36,15 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Clients', 'url' => ['/client/index']],
+            ['label' => 'Addresses', 'url' => ['/address/index']],
+        ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
