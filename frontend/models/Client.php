@@ -32,4 +32,11 @@ class Client extends \common\models\Client
             self::GENDER_FEMALE => 'Female'
         ];
     }
+
+    public static function getNameGender($genderId)
+    {
+        $genders = self::getGenders();
+        if (isset($genders[$genderId])) return $genders[$genderId];
+        return '';
+    }
 }

@@ -4,10 +4,10 @@
  */
 ?>
 
-<?php $form = \yii\widgets\ActiveForm::begin([]); ?>
+<?php $form = \yii\widgets\ActiveForm::begin(['id' => 'address-form',
+    'options' => ['data-pjax' => '']]); ?>
 
 <div class="form-group">
-    <h3>Address</h3>
 
 <?= $form->field($model, 'index')->input('number');?>
 
@@ -24,7 +24,7 @@
 <?= \yii\helpers\Html::submitButton('Save', [
     'id' => 'submit_btn',
     'class' => 'btn btn-info',
-    'style' => 'float:right;'
+//    'style' => 'float:right;'
 ])?>
 
 </div>

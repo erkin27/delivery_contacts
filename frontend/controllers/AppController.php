@@ -25,7 +25,7 @@ class AppController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['clients', 'create-client', 'view', 'update-client', 'delete'],
+                        'actions' => ['clients', 'create-client', 'view', 'update-client', 'delete', 'create-address'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -96,6 +96,7 @@ class AppController extends Controller
 
         if ($client->load(\Yii::$app->request->post()) && $client->validate()) {
             $client->save();
+            return $this->redirect(['view', 'id' => $client->id]);
         }
 
         return $this->render('update', ['model' => $client]);
@@ -108,5 +109,17 @@ class AppController extends Controller
         $client->delete();
 
         return $this->redirect('clients');
+    }
+
+    public function actionCreateAddress($id)
+    {
+        $address = new Address();
+        if ($address->load(\Yii::$app->request->post()) && $address->validate()) {
+            $address->client_id = $id;
+            if ($address->save()) {
+                return $this->redirect(['update-client', 'id' => $id]);
+            }
+        }
+        return $this->renderAjax('create_address', ['model' => $address]);
     }
 }

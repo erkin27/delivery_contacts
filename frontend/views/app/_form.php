@@ -10,7 +10,7 @@
 <div style="margin-top: -15px;">
     <div class="flex-container">
         <div class="flex-item">
-            <div class="col-md-offset-2">
+            <div class="col-md-offset-0">
                 <h3>Client</h3>
 
                 <?= $form->field($client, 'login')->textInput();?>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="flex-item">
-            <div class="col-md-offset-2">
+            <div class="col-md-offset-0">
                 <h3>Address</h3>
 
                 <?= $form->field($address, 'index')->input('number');?>

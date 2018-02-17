@@ -11,12 +11,17 @@ GridView::widget([
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
 
-        'id',
+//        'id',
         'login',
         'password',
         'name',
         'surname',
-        'gender',
+        'gender' => [
+                'attribute' => 'gender',
+            'value' => function ($data) {
+                return \frontend\models\Client::getNameGender($data->gender);
+            }
+        ],
         'created' => [
             'attribute' => 'created',
             'value' => function ($data) {
