@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-<?php \yii\widgets\Pjax::begin(['id' => 'addresses_list', 'timeout' => 1000, 'clientOptions' => ['container' => 'pjax-container']]) ?>
+<?php \yii\widgets\Pjax::begin() ?>
 
         <?= \yii\grid\GridView::widget([
             'dataProvider' => $dataProvider,
