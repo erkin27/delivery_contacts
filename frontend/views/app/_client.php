@@ -4,6 +4,7 @@
  * @var $model \frontend\models\Client
  */
 use yii\bootstrap\Modal;
+use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 
@@ -27,13 +28,23 @@ use yii\helpers\Url;
     <label>Addresses</label>
     <?php foreach ($addresses as $address):?>
         <?php /**@var $address \frontend\models\Address  */?>
-        <?= \yii\helpers\Html::textInput('Address',
-            $address->country. ", " . $address->city. ", str. " . $address->street . ", h. №" . $address->house . ", fl." . $address->float,
-            ['disabled' => true, 'class' => 'form-control', 'style' => 'width: 50%'])?>
+        <div class="form-inline form-group">
+            <?= \yii\helpers\Html::textInput('Address',
+                $address->country. ", " . $address->city. ", str. " . $address->street . ", h. №" . $address->house . ", fl." . $address->float,
+                ['disabled' => true, 'class' => 'form-control', 'style' => 'width: 50%'])?>
+            <button class="address_btn btn btn-default" data-url = <?=Url::toRoute(['/app/create-address', 'id' => $model->id, 'addrId' => $address->id]) ?> ><span class="glyphicon glyphicon-pencil"></span></button>
+            <?= Html::a('', ['/app/delete-address', 'id' => $model->id, 'addrId' => $address->id], [
+                'class' => 'btn btn-default glyphicon glyphicon-trash',
+                'data' => [
+                    'confirm' => Yii::t('app', 'Are you sure that you want delete this address?'),
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </div>
     <?php endforeach;?>
 
     <?= \yii\helpers\Html::button('Add address', [
-            'id' => 'address_btn', 'class' => 'btn btn-success','style' => 'margin-top:5px;',
+            'class' => 'address_btn btn btn-success','style' => 'margin-top:5px;',
             'data-url' =>Url::toRoute(['/app/create-address', 'id' => $model->id])
     ])?>
 
@@ -56,7 +67,7 @@ use yii\helpers\Url;
 <?php Modal::end(); ?>
 <?php
 $js = <<<SCRIPT
-    $('#address_btn').click(function (event) {
+    $('.address_btn').click(function (event) {
         event.preventDefault();
         $('#modalAddress').modal('show')
             .find('#modalAddressContent')

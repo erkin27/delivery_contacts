@@ -25,7 +25,7 @@ class AppController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['clients', 'create-client', 'view', 'update-client', 'delete', 'create-address'],
+                        'actions' => ['clients', 'create-client', 'view', 'update-client', 'delete', 'create-address', 'delete-address'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -40,6 +40,9 @@ class AppController extends Controller
         ];
     }
 
+    /**
+     * @return string
+     */
     public function actionClients()
     {
         $clients = Client::find();
@@ -53,6 +56,9 @@ class AppController extends Controller
         ]);
     }
 
+    /**
+     * @return string|\yii\web\Response
+     */
     public function actionCreateClient()
     {
         $client = new Client();
@@ -81,6 +87,10 @@ class AppController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return string
+     */
     public function actionView($id)
     {
         $client = Client::findOne($id);
@@ -92,6 +102,10 @@ class AppController extends Controller
         return $this->render('view', ['client' => $client, 'dataProvider' => $dataProvider]);
     }
 
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     */
     public function actionUpdateClient($id)
     {
         $client = Client::findOne($id);
@@ -104,6 +118,10 @@ class AppController extends Controller
         return $this->render('update', ['model' => $client]);
     }
 
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     */
     public function actionDelete($id)
     {
         $client = Client::findOne($id);
@@ -113,15 +131,36 @@ class AppController extends Controller
         return $this->redirect('clients');
     }
 
-    public function actionCreateAddress($id)
+    /**
+     * @param $id
+     * @param null $addrId
+     * @return string|\yii\web\Response
+     */
+    public function actionCreateAddress($id, $addrId = null)
     {
-        $address = new Address();
-        if ($address->load(\Yii::$app->request->post()) && $address->validate()) {
-            $address->client_id = $id;
-            if ($address->save()) {
-                return $this->redirect(['update-client', 'id' => $id]);
+        $address = !empty($addrId) ? Address::findOne($addrId) : new Address();
+        if(\Yii::$app->request->isPost) {
+            if ($address->load(\Yii::$app->request->post()) && $address->validate()) {
+                $address->client_id = $id;
+                if ($address->save()) {
+                    return $this->redirect(['update-client', 'id' => $id]);
+                }
             }
         }
+
         return $this->renderAjax('create_address', ['model' => $address]);
+    }
+
+    /**
+     * @param $id
+     * @param $addrId
+     * @return \yii\web\Response
+     */
+    public function actionDeleteAddress($id, $addrId)
+    {
+        $address = Address::findOne($addrId);
+        $address->delete();
+
+        return $this->redirect(['update-client', 'id' => $id]);
     }
 }
