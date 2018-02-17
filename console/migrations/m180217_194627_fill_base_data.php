@@ -18,7 +18,7 @@ class m180217_194627_fill_base_data extends Migration
             $this->insert("{{%client}}", [
                 'login' => $faker->format('firstName'),
                 'password' => $faker->format('numberBetween', ['min' => 1000000, 'max' => 10000000]),
-                'name' => $faker->name(),
+                'name' => $faker->format('firstName'),
                 'surname' => $faker->format('lastName'),
                 'gender' => rand(1, 3),
                 'created' => $faker->format('iso8601'),
