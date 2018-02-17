@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\Address;
+use frontend\models\Client;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -26,7 +28,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup', 'clients', 'createClient'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -34,7 +36,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'clients', 'createClient'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -72,7 +74,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect('clients');
     }
 
     /**
@@ -83,12 +85,12 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect('clients');
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect('clients');
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -105,7 +107,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect('login');
     }
 
     /**
@@ -209,5 +211,38 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionClients()
+    {
+        return $this->render('/clients/index');
+    }
+
+    public function actionCreateClient()
+    {
+        $client = new Client();
+
+        $address = new Address();
+
+        $request = Yii::$app->request;
+
+        if ($request->post()) {
+            if ($client->load($request->post()) && $address->load($request->post())) {
+                if ($client->validate() && $address->validate()) {
+                    try {
+                        if ($client->save()) $address->client_id = $client->id;
+                        $address->save();
+                        Yii::$app->getSession()->setFlash('success', 'Success.');
+                    } catch (\Exception $e) {
+                        Yii::$app->getSession()->setFlash('error', 'Error.');
+                    }
+                }
+            }
+        }
+
+        return $this->render('/clients/create', [
+                'client' => $client,
+                'address' => $address
+            ]);
     }
 }

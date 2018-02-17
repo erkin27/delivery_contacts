@@ -118,3 +118,27 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.flex-container {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+.flex-item {
+    margin: 0 30px;
+    padding: 5px;
+    width: 100%;
+}
+
+@media(max-width:600px) {
+    .flex-container {
+        display: block;
+    }
+
+    .flex-item {
+        margin: 0 auto;
+        padding: 5px;
+        width: 100%;
+    }
+}
