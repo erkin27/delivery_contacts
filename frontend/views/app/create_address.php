@@ -9,7 +9,7 @@ use yii\helpers\Html;
 $this->title = Yii::t('app', 'Create Address');
 
 ?>
-<?php \yii\widgets\Pjax::begin(['enablePushState' => false, 'timeout'=>7000,  'options' => ['id' => 'sentence-index']]); ?>
+<?php \yii\widgets\Pjax::begin(['enablePushState' => false, 'timeout'=>2000]); ?>
     <div class="address-create">
 
         <?= $this->render('_address', [

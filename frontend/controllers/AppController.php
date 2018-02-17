@@ -85,9 +85,11 @@ class AppController extends Controller
     {
         $client = Client::findOne($id);
 
-        $addresses = $client->getAddresses()->all();
+        $addresses = $client->getAddresses();
+        $dataProvider = new ActiveDataProvider(['query' => $addresses]);
+        $dataProvider->pagination->pageSize = 5;
 
-        return $this->render('view', ['client' => $client, 'addresses' => $addresses]);
+        return $this->render('view', ['client' => $client, 'dataProvider' => $dataProvider]);
     }
 
     public function actionUpdateClient($id)

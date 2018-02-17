@@ -5,8 +5,6 @@
  */
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
-
-
 ?>
 
 <?php $form = \yii\widgets\ActiveForm::begin([]); ?>

@@ -3,11 +3,10 @@
  * @var $this yii\web\View;
  */
 ?>
+<div class="address-form">
 
 <?php $form = \yii\widgets\ActiveForm::begin(['id' => 'address-form',
     'options' => ['data-pjax' => '']]); ?>
-
-<div class="form-group">
 
 <?= $form->field($model, 'index')->input('number');?>
 
@@ -27,5 +26,7 @@
 //    'style' => 'float:right;'
 ])?>
 
-</div>
 <?php \yii\widgets\ActiveForm::end(); ?>
+
+</div>
+

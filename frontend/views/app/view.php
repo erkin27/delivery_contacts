@@ -44,11 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <?php foreach ($addresses as $address):?>
+<?php \yii\widgets\Pjax::begin(['id' => 'addresses_list', 'timeout' => 1000, 'clientOptions' => ['container' => 'pjax-container']]) ?>
 
-        <?= DetailView::widget([
-            'model' => $address,
-            'attributes' => [
+        <?= \yii\grid\GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
                 'index',
                 'country',
                 'city',
@@ -58,6 +58,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
-    <?php endforeach;?>
+<?php \yii\widgets\Pjax::end()?>
 
 </div>

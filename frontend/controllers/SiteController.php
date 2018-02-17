@@ -90,7 +90,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('clients');
+            return $this->redirect('/app/clients');
         } else {
             return $this->render('login', [
                 'model' => $model,
