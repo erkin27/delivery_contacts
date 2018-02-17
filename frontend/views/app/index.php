@@ -34,7 +34,7 @@ GridView::widget([
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                     'update' => function($url, $model, $key) {
-                        return \yii\helpers\Html::a('<span title="Unblock customer" class="glyphicon glyphicon-pencil"></span>',
+                        return \yii\helpers\Html::a('<span title="Edit client" class="glyphicon glyphicon-pencil"></span>',
                             \yii\helpers\Url::to(['app/update-client', 'id' => $model->id])
                             );
                     }
