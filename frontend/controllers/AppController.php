@@ -119,14 +119,14 @@ class AppController extends Controller
     }
 
     /**
-     * @param $id
      * @return \yii\web\Response
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $client = Client::findOne($id);
-
-        $client->delete();
+        if (\Yii::$app->request->isPost) {
+            $client = Client::findOne(\Yii::$app->request->post('id'));
+            $client->delete();
+        }
 
         return $this->redirect('clients');
     }
@@ -152,15 +152,16 @@ class AppController extends Controller
     }
 
     /**
-     * @param $id
-     * @param $addrId
      * @return \yii\web\Response
      */
-    public function actionDeleteAddress($id, $addrId)
+    public function actionDeleteAddress()
     {
-        $address = Address::findOne($addrId);
-        $address->delete();
-
-        return $this->redirect(['update-client', 'id' => $id]);
+        if (\Yii::$app->request->isPost) {
+            $id = \Yii::$app->request->post('id');
+            $addrId = \Yii::$app->request->post('addrId');
+            $address = Address::findOne($addrId);
+            $address->delete();
+            return $this->redirect(['update-client', 'id' => $id]);
+        }
     }
 }

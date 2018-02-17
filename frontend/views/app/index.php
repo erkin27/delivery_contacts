@@ -37,7 +37,17 @@ GridView::widget([
                         return \yii\helpers\Html::a('<span title="Edit client" class="glyphicon glyphicon-pencil"></span>',
                             \yii\helpers\Url::to(['app/update-client', 'id' => $model->id])
                             );
-                    }
+                    },
+                'delete' => function($url, $model, $key) {
+                    return \yii\helpers\Html::a('<span title="Edit client" class="glyphicon glyphicon-trash"></span>',
+                        ['app/delete'], [
+                            'data' => [
+                                'confirm' => Yii::t('app', 'Are you sure that you want delete this client?'),
+                                'method' => 'post',
+                                'params' => [ 'id' => $model->id]
+                           ]
+                        ]);
+                }
             ]
         ],
     ],

@@ -34,11 +34,14 @@ use yii\helpers\Url;
                 ['disabled' => true, 'class' => 'form-control'])?>
             <span class="input-group-btn">
                 <button class="address_btn btn btn-default" data-url = "<?=Url::toRoute(['/app/create-address', 'id' => $model->id, 'addrId' => $address->id]) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
-                <?= Html::a('<span class=" glyphicon glyphicon-trash"></span>', ['/app/delete-address', 'id' => $model->id, 'addrId' => $address->id], [
+                <?= Html::a('<span class=" glyphicon glyphicon-trash"></span>', ['/app/delete-address'], [
                     'class' => 'btn btn-default',
                     'data' => [
                         'confirm' => Yii::t('app', 'Are you sure that you want delete this address?'),
                         'method' => 'post',
+                        'params' => [
+                            'id' => $model->id, 'addrId' => $address->id
+                        ]
                     ],
                 ]) ?>
             </span>
