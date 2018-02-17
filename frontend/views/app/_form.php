@@ -15,7 +15,7 @@
 
                 <?= $form->field($client, 'login')->textInput();?>
 
-                <?= $form->field($client, 'password')->passwordInput();?>
+                <?= $form->field($client, 'password')->textInput();?>
 
                 <?= $form->field($client, 'name')->textInput();?>
 

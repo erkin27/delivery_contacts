@@ -28,7 +28,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup', 'clients', 'createClient'],
+                'only' => ['logout', 'signup'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -36,7 +36,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'clients', 'createClient'],
+                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -211,38 +211,5 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
-    }
-
-    public function actionClients()
-    {
-        return $this->render('/clients/index');
-    }
-
-    public function actionCreateClient()
-    {
-        $client = new Client();
-
-        $address = new Address();
-
-        $request = Yii::$app->request;
-
-        if ($request->post()) {
-            if ($client->load($request->post()) && $address->load($request->post())) {
-                if ($client->validate() && $address->validate()) {
-                    try {
-                        if ($client->save()) $address->client_id = $client->id;
-                        $address->save();
-                        Yii::$app->getSession()->setFlash('success', 'Success.');
-                    } catch (\Exception $e) {
-                        Yii::$app->getSession()->setFlash('error', 'Error.');
-                    }
-                }
-            }
-        }
-
-        return $this->render('/clients/create', [
-                'client' => $client,
-                'address' => $address
-            ]);
     }
 }

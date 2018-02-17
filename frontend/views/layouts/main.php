@@ -31,7 +31,7 @@ Yii::$app->name = 'Delivery Contacts App';
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
-        'brandUrl' => \yii\helpers\Url::to(['/site/clients']),
+        'brandUrl' => \yii\helpers\Url::to(['/app/clients']),
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -42,8 +42,8 @@ Yii::$app->name = 'Delivery Contacts App';
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems = [
-            ['label' => 'Clients', 'url' => ['/site/clients']],
-            ['label' => 'Add Client', 'url' => ['/site/create-client']],
+            ['label' => 'Clients', 'url' => ['/app/clients']],
+            ['label' => 'Add Client', 'url' => ['/app/create-client']],
         ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
