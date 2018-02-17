@@ -6,6 +6,8 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Client */
 /* @var $form yii\widgets\ActiveForm */
+
+$model->created = date('d-m-Y h:s', strtotime($model->created));
 ?>
 
 <div class="client-form">

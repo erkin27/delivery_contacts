@@ -23,7 +23,7 @@ class m180216_133817_add_tbl_clients extends Migration
             'name' => $this->string()->notNull(),
             'surname' => $this->string()->notNull(),
             'gender' => $this->smallInteger()->notNull()->defaultValue(3),
-            'created' => $this->integer()->notNull(),
+            'created' => $this->string()->notNull(),
             'email' => $this->string()->unique()->notNull()
         ]);
     }
