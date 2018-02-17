@@ -28,18 +28,21 @@ use yii\helpers\Url;
     <label>Addresses</label>
     <?php foreach ($addresses as $address):?>
         <?php /**@var $address \frontend\models\Address  */?>
-        <div class="form-inline form-group">
+        <div class="input-group form-group">
             <?= \yii\helpers\Html::textInput('Address',
                 $address->country. ", " . $address->city. ", str. " . $address->street . ", h. №" . $address->house . ", fl." . $address->float,
-                ['disabled' => true, 'class' => 'form-control', 'style' => 'width: 50%'])?>
-            <button class="address_btn btn btn-default" data-url = <?=Url::toRoute(['/app/create-address', 'id' => $model->id, 'addrId' => $address->id]) ?> ><span class="glyphicon glyphicon-pencil"></span></button>
-            <?= Html::a('', ['/app/delete-address', 'id' => $model->id, 'addrId' => $address->id], [
-                'class' => 'btn btn-default glyphicon glyphicon-trash',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure that you want delete this address?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
+                ['disabled' => true, 'class' => 'form-control'])?>
+            <span class="input-group-btn">
+                <button class="address_btn btn btn-default" data-url = "<?=Url::toRoute(['/app/create-address', 'id' => $model->id, 'addrId' => $address->id]) ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+                <?= Html::a('<span class=" glyphicon glyphicon-trash"></span>', ['/app/delete-address', 'id' => $model->id, 'addrId' => $address->id], [
+                    'class' => 'btn btn-default',
+                    'data' => [
+                        'confirm' => Yii::t('app', 'Are you sure that you want delete this address?'),
+                        'method' => 'post',
+                    ],
+                ]) ?>
+            </span>
+
         </div>
     <?php endforeach;?>
 
