@@ -12,6 +12,7 @@ namespace frontend\controllers;
 use frontend\models\Address;
 use frontend\models\Client;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -158,10 +159,19 @@ class AppController extends Controller
     {
         if (\Yii::$app->request->isPost) {
             $id = \Yii::$app->request->post('id');
-            $addrId = \Yii::$app->request->post('addrId');
-            $address = Address::findOne($addrId);
-            $address->delete();
-            return $this->redirect(['update-client', 'id' => $id]);
+            $address = Address::findOne($id);
+
+            $count = (new Query())->select('id')
+                ->from('address')
+                ->where(['client_id' => $address->client_id])
+                ->count();
+
+            if ($count == 1) {
+                \Yii::$app->session->setFlash('error', 'The client must have at least one address');
+            } else {
+                $address->delete();
+            }
+            return $this->redirect(['update-client', 'id' => $address->client_id]);
         }
     }
 }

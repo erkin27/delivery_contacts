@@ -40,7 +40,7 @@ use yii\helpers\Url;
                         'confirm' => Yii::t('app', 'Are you sure that you want delete this address?'),
                         'method' => 'post',
                         'params' => [
-                            'id' => $model->id, 'addrId' => $address->id
+                            'id' => $address->id
                         ]
                     ],
                 ]) ?>
