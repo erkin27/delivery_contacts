@@ -8,7 +8,7 @@
 <?php $form = \yii\widgets\ActiveForm::begin(['id' => 'address-form',
     'options' => ['data-pjax' => '']]); ?>
 
-<?= $form->field($model, 'index')->input('number');?>
+<?= $form->field($model, 'index')->textInput();?>
 
 <?= $form->field($model, 'country')->textInput(['maxlength' => 2]);?>
 

@@ -34,8 +34,9 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['client_id', 'index', 'house', 'float'], 'integer'],
+            [['client_id',  'house', 'float'], 'integer'],
             [['country'], 'string', 'max' => 2],
+            [['index'], 'string', 'max' => 20],
             [['city', 'street'], 'string', 'max' => 255],
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['client_id' => 'id']],
         ];

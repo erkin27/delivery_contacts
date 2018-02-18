@@ -30,7 +30,7 @@ use yii\helpers\Url;
         <?php /**@var $address \frontend\models\Address  */?>
         <div class="input-group form-group">
             <?= \yii\helpers\Html::textInput('Address',
-                $address->country. ", " . $address->city. ", str. " . $address->street . ", h. №" . $address->house . ", fl." . $address->float,
+                $address->index . ", " .$address->country. ", " . $address->city. ", str. " . $address->street . ", h. №" . $address->house . ", fl." . $address->float,
                 ['disabled' => true, 'class' => 'form-control'])?>
             <span class="input-group-btn">
                 <button class="address_btn btn btn-default" data-url = "<?=Url::toRoute(['/app/create-address', 'id' => $model->id, 'addrId' => $address->id]) ?>"><span class="glyphicon glyphicon-pencil"></span></button>

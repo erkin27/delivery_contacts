@@ -18,7 +18,7 @@ class m180216_181225_add_tbl_address extends Migration
         $this->createTable($this->tableName, [
             'id' => $this->primaryKey(),
             'client_id' => $this->integer()->notNull(),
-            'index' => $this->integer()->notNull(),
+            'index' => $this->string()->notNull(),
             'country' => $this->string(2)->notNull(),
             'city' => $this->string()->notNull(),
             'street' => $this->string()->notNull(),

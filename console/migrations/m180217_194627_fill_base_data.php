@@ -32,7 +32,7 @@ class m180217_194627_fill_base_data extends Migration
             for ($i = 0; $i<20; $i++) {
                 $this->insert("{{%address}}", [
                     'client_id' => $clientId,
-                    'index' => $faker->format('postcode'),
+                    'index' => ''. $faker->format('postcode'),
                     'country' => $faker->format('stateAbbr'),
                     'city' => $faker->format('city'),
                     'street' => $faker->format('streetName'),
