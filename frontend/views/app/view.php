@@ -17,11 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update-client', 'id' => $client->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $client->id], [
+        <?= Html::a(Yii::t('app', 'Delete'), ['delete'],
+            [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
+                'params' => ['id' => $client->id]
             ],
         ]) ?>
     </p>
