@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'gender' => [
                 'attribute' => 'gender',
                 'value' => function ($data) {
-                    return \frontend\models\Client::getNameGender($data->id);
+                    return \frontend\models\Client::getNameGender($data->gender);
                 }
             ],
             'created' => [
