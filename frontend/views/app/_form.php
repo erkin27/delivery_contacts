@@ -31,7 +31,7 @@
             <div class="col-md-offset-0">
                 <h3>Address</h3>
 
-                <?= $form->field($address, 'index')->input('number');?>
+                <?= $form->field($address, 'index')->textInput();?>
 
                 <?= $form->field($address, 'country')->textInput(['maxlength' => 2]);?>
 
